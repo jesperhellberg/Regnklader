@@ -1,0 +1,3 @@
+# Regnklader
+
+A small androidapp to check if I need to bring a raincoat...
