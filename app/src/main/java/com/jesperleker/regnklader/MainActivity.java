@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                testText();
+                testText();             //Kanske inte så snyggt...
             }
         });
 

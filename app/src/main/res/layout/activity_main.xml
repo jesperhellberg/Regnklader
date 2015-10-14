@@ -25,15 +25,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/newText"
-                android:textSize="20sp"
-                android:id="@+id/output"
-                android:gravity="center"
+                <android.support.v4.view.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/viewpager"
+                    />
 
-                />
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="@string/newText"-->
+                <!--android:textSize="20sp"-->
+                <!--android:id="@+id/output"-->
+                <!--android:gravity="center"-->
+
+                <!--/>-->
 
 
             </ScrollView>
