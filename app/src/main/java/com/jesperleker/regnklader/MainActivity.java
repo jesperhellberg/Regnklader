@@ -1,6 +1,7 @@
 package com.jesperleker.regnklader;
 
 import android.os.AsyncTask;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textview = (TextView) findViewById(R.id.output);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new myFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
+
+
+
+//        textview = (TextView) findViewById(R.id.output);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -12,14 +12,16 @@
         android:elevation="6dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeArea"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_below="@id/toolbar">
+
 
             <ScrollView
                 android:layout_width="match_parent"
