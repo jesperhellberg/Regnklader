@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.jesperleker.regnklader.stab.SlidingTabLayout;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new myFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
 
-
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tablist);
+        slidingTabLayout.setViewPager(viewPager);
 
 //        textview = (TextView) findViewById(R.id.output);
 
@@ -140,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if (totalRain > 0) textview.setText("Ta med regnkläder, det kommer att regna " + String.format("%.2f", totalRain) + " mm idag.");
-            else textview.setText("Idag behövs inga regnkläder");
+//            if (totalRain > 0) textview.setText("Ta med regnkläder, det kommer att regna " + String.format("%.2f", totalRain) + " mm idag.");
+//            else textview.setText("Idag behövs inga regnkläder");
 
         } catch (JSONException e) {
             e.printStackTrace();
