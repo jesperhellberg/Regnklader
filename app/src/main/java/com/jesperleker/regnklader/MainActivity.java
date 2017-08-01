@@ -25,7 +25,7 @@ import java.util.GregorianCalendar;
 public class MainActivity extends AppCompatActivity {
 
     TextView textview;
-    private final String URL = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/59.386888/lon/13.464021/data.json";
+    private final String URL = "http://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.464021/lat/59.386888/data.json";
     private SwipeRefreshLayout swipe;
     JSONParse jsonParse;
 
