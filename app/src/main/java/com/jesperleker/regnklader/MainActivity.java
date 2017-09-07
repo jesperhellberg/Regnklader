@@ -24,7 +24,7 @@ import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textview;
+    public TextView textview;
     private final String URL = "http://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.464021/lat/59.386888/data.json";
     private SwipeRefreshLayout swipe;
     JSONParse jsonParse;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tablist);
         slidingTabLayout.setViewPager(viewPager);
 
-//        textview = (TextView) findViewById(R.id.output);
+        textview = (TextView) findViewById(R.id.today_text);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        new JSONParse().execute();
+        new JSONParse().execute();
 //        jsonParse = new JSONParse();
 //        jsonParse.execute();
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         new JSONParse().execute();
     }
 
-    private void testText(){
+    public void testText(){
         refreshUpdate();
         swipe.setRefreshing(false);
     }
@@ -117,16 +117,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getForecast(JSONObject jsonObject) {
+
         try{
-            JSONArray arr = jsonObject.getJSONArray("timeseries");
+            JSONArray arr = jsonObject.getJSONArray("timeSeries");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
             Date now = new Date();
 
             GregorianCalendar cal = new GregorianCalendar();
             cal.setTime(now);
-            cal.set(Calendar.HOUR_OF_DAY, 17);
-            cal.set(Calendar.MINUTE, 59);
+//            cal.set(Calendar.HOUR_OF_DAY, 17);
+//            cal.set(Calendar.MINUTE, 59);
+            cal.add(Calendar.DAY_OF_MONTH, 1);
             Date tomorrow = cal.getTime();
 
             Double totalRain = 0d;
@@ -135,23 +137,23 @@ public class MainActivity extends AppCompatActivity {
                 Date jsonDate = sdf.parse(arr.getJSONObject(i).getString("validTime"));
 
                 if(now.before(jsonDate) && tomorrow.after(jsonDate)){
-                    Double rain = Double.parseDouble(arr.getJSONObject(i).getString("pit"));
-                    totalRain += rain;
-                }
-                else{
-//                    break;                //ta bort kommentar när testningen är klar. Behöver nog vara i en else if för att inte avsluta om now är after jsonDate
+                    JSONArray parameters =  arr.getJSONObject(i).getJSONArray("parameters");
+                    for(int j = 0; j < parameters.length(); j++){
+                        if(parameters.getJSONObject(j).getString("name").equals("pmax")){
+                           totalRain += parameters.getJSONObject(j).getJSONArray("values").getDouble(0);
+                        }
+                    }
                 }
             }
+            textview = (TextView) findViewById(R.id.today_text);
 
-//            if (totalRain > 0) textview.setText("Ta med regnkläder, det kommer att regna " + String.format("%.2f", totalRain) + " mm idag.");
-//            else textview.setText("Idag behövs inga regnkläder");
+            if (totalRain > 0) textview.setText("Ta med regnkläder, det kommer att regna " + String.format("%.2f", totalRain) + " mm idag.");
+            else textview.setText("Idag behövs inga regnkläder");
 
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 }
